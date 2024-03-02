@@ -37,12 +37,11 @@
         private static void Register()
         {
             Console.Write("Enter your name: ");
-            string name = Console.ReadLine();
+            string name = Console.ReadLine();       
             Console.Write("Enter your last name: ");
             string lastName = Console.ReadLine();
             Console.Write("Enter personal number: ");
-            string personalNumber = Console.ReadLine();
-
+            string personalNumber = Console.ReadLine();           
             ATMFunctions.ATMFunctions.Register(name, lastName, personalNumber);
         }
 

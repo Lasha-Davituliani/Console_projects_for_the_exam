@@ -28,13 +28,27 @@ namespace ATMFunctions
 
         public static void Register(string name, string lastName, string personalNumber)
         {
+            if (string.IsNullOrEmpty(name) || string.IsNullOrWhiteSpace(name))
+            {
+                Console.WriteLine("name is empty, please fill information again");
+                return;
+            }
+            if (string.IsNullOrEmpty(lastName) || string.IsNullOrWhiteSpace(lastName))
+            {
+                Console.WriteLine("last name is empty, please fill information again");
+                return;
+            }
+            if (!IsValidPersonalNumber(personalNumber))
+            {
+                Console.WriteLine("Error: Personal number must be exactly 11 digits long and contain only numbers.");
+                return;
+            }
             if (users.Exists(u => u.PersonalNumber == personalNumber))
             {
                 Console.WriteLine("Error: Personal number already registered. Please login or choose a different personal number.");
                 return;
             }
 
-            // Generate a random password
             string password = GenerateRandomPassword();
 
             User newUser = new User
@@ -53,6 +67,11 @@ namespace ATMFunctions
             Console.WriteLine($"Registration successful! Your password is: {password}");
             Console.WriteLine("Please remember your password and use it to login.");
         }
+        public static bool IsValidPersonalNumber(string personalNumber)
+        {
+           return personalNumber.Length == 11 && personalNumber.All(char.IsDigit);
+        }
+        
 
         public static string GenerateRandomPassword()
         {
@@ -62,7 +81,7 @@ namespace ATMFunctions
               .Select(s => s[random.Next(s.Length)]).ToArray());
         }
 
-        // ... (Previous code)
+
 
         public static void Login()
         {
