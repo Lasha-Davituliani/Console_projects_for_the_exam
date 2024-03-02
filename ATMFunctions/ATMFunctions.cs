@@ -28,16 +28,6 @@ namespace ATMFunctions
 
         public static void Register(string name, string lastName, string personalNumber)
         {
-            //if (string.IsNullOrEmpty(name) || string.IsNullOrWhiteSpace(name))
-            //{
-            //    Console.WriteLine("name is empty, please fill information again");
-            //    return;
-            //}
-            //if (string.IsNullOrEmpty(lastName) || string.IsNullOrWhiteSpace(lastName))
-            //{
-            //    Console.WriteLine("last name is empty, please fill information again");
-            //    return;
-            //}
             if (!IsValidPersonalNumber(personalNumber))
             {
                 Console.WriteLine("Error: Personal number must be exactly 11 digits long and contain only numbers.");
