@@ -9,10 +9,30 @@ class NumberGuessingGame
         Console.WriteLine("1. Easy (1-25)");
         Console.WriteLine("2. Medium (1-50)");
         Console.WriteLine("3. Hard (1-100)");
-        Console.Write("Enter your choice: ");
 
-        int choice = int.Parse(Console.ReadLine());
-        int maxNumber = 0;
+        int choice;
+        int maxNumber;
+
+        while (true)
+        {
+            Console.Write("Enter your choice: ");
+
+            if (int.TryParse(Console.ReadLine(), out choice))
+            {
+                if (choice >= 1 && choice <= 3)
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid choice. Please enter a number between 1 and 3.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Invalid input. Please enter a valid number.");
+            }
+        }
 
         switch (choice)
         {
@@ -26,7 +46,6 @@ class NumberGuessingGame
                 maxNumber = 100;
                 break;
             default:
-                Console.WriteLine("Invalid choice. Defaulting to Easy.");
                 maxNumber = 25;
                 break;
         }
@@ -40,24 +59,30 @@ class NumberGuessingGame
         while (attempts > 0)
         {
             Console.Write("Enter your guess: ");
-            int guess = int.Parse(Console.ReadLine());
 
-            if (guess == randomNumber)
+            if (int.TryParse(Console.ReadLine(), out int guess))
             {
-                Console.WriteLine($"Congratulations! You guessed the number in {11 - attempts} - attempts!");
-                return;
-            }
-            else if (guess < randomNumber)
-            {
-                Console.WriteLine("The target number is higher.");
+                if (guess == randomNumber)
+                {
+                    Console.WriteLine($"Congratulations! You guessed the number in {11 - attempts} attempts!");
+                    return;
+                }
+                else if (guess < randomNumber)
+                {
+                    Console.WriteLine("The target number is higher.");
+                }
+                else
+                {
+                    Console.WriteLine("The target number is lower.");
+                }
+
+                attempts--;
+                Console.WriteLine($"Attempts: {attempts}");
             }
             else
             {
-                Console.WriteLine("The target number is lower.");
+                Console.WriteLine("Invalid input. Please enter a valid number.");
             }
-
-            attempts--;
-            Console.WriteLine($"Attempts : {attempts}");
         }
 
         Console.WriteLine($"Sorry, you've run out of attempts. The number was {randomNumber}.");
