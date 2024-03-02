@@ -33,13 +33,22 @@
             }
         }
 
-        // Move these functions inside the Program class
         private static void Register()
         {
             Console.Write("Enter your name: ");
-            string name = Console.ReadLine();       
+            string name = Console.ReadLine();
+            if (string.IsNullOrEmpty(name) || string.IsNullOrWhiteSpace(name))
+            {
+                Console.WriteLine("name is empty, please fill information again");
+                return;
+            }
             Console.Write("Enter your last name: ");
             string lastName = Console.ReadLine();
+            if (string.IsNullOrEmpty(lastName) || string.IsNullOrWhiteSpace(lastName))
+            {
+                Console.WriteLine("last name is empty, please fill information again");
+                return;
+            }
             Console.Write("Enter personal number: ");
             string personalNumber = Console.ReadLine();           
             ATMFunctions.ATMFunctions.Register(name, lastName, personalNumber);
